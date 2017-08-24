@@ -1,0 +1,115 @@
+
+cd :change directory 
+pwd: print working directory 展示现所在文件夹
+cd /usr : / %%absolute path form the root dir 
+cd lib : without / %% relative path from the working dir
+cd ./lib : ./ %% in the current dir
+cd ~ :~ %% home dir
+cd ../ %%one level up 
+
+
+
+ls    show library 展示所在文件路径包含的文件
+ls -l  %%more information	
+ls -r  %%list in reverse order
+ls -p  %%list based on file type
+ls /usr/share
+
+
+
+!!  %%rerun the previous command
+
+
+
+su  %%switch user
+sudo %%super user do
+
+
+
+apt-get  %%program to install app
+apt-get install ... 
+apt-get autoremove
+apt-get upgrade 
+apt-get remove
+~
+apt-cache search bluefish*  %%find anything with 'bluefish' in it. 
+apt-cache %%queries and displays available information about installed and installable packages.
+apt-cache search   %%search for a regex pattern (regex:regular expression)
+apt-cahce policy   %%show policy settings  to see something installed or not
+
+
+
+dpkg   %%debian package to intall .deb files
+dpkg -i  %% install this packagek
+
+
+
+-rw-r--r--   %%file  descriptions for permissions , owner:r&w, user group:r,public:r;
+drwxr-xr-x   %%readble,writable,excutable
+chown root:honggang file.txt    %%change ownership  owner:user group s
+chown -R honggang:honggang ./mydir    %%-R: to make this action recursive, 循环对于该文件夹中所有文件执行该命令。
+chmod 666 :  %%change the permissions based on the order above, 2: writable,4: readable.1: executable
+7=4读+2写+1执行
+
+
+
+mkdir   %%make a directory.
+rm   %%remove a file
+rm -rf  %%romve a directory.
+rm honggang/file.txt  ;  rm honggang/file.*; rm honggang/*.txt; rm honggang/*   %%remove everything but leave the directory.
+mv file1 file2   %%copy command
+mv a.cpp newDir/a.cpp 
+cp ./mydir/a.cpp ./newdir/a.cpp
+cp ./mydir/a.cpp ./mydir/b.cpp 
+
+
+
+
+touch file1.TXT flie2.PHP file3.php ...   %%create new empty files and change timestamps
+touch -am file1
+find . -type f -name "*.php" %% argument . : search in the current dir; -type f : search type file, -name "" : search name.
+find . -type f -iname "*.php"  %% argument -iname : igonre the difference of upper and lower cases.
+flags:
+-maxdepth num   %%搜索层次
+-size +10k
+-perm 0664  %%permission options 0664
+-not   %%反集
+
+grep -i "function" ./*   %% find the keywords despite of upper or lower cases of functions in the files of this current dir.
+grep -n -i "function" ./*  %% flags -n :line num of the keywords, -i : ignore the cases.
+**grep 命令可与 find 命令 重合使用:  find . -type f -iname "*.php" -exec grep -i -n "function" {} +
+attention:  -exec grep -i -n "function" {} + 整体为一个flag， 由- 开始 + 结束
+
+
+
+
+>  %%redirect the output of a command into a file.
+ls > output.txt
+| tee  %%print the results out and also save them in a file.
+ls -l | tee of.txt 
+
+
+
+MANAGING PROCESSES:
+top   %% show the realtime list of running apps.
+PID   %% Process ID
+ps aux  %% show the entire list of run apps, not r.t.
+ps aux | grep firefox  %% find any processes related to firefox
+pgrep firefox   %%find the PID of firefox instances
+kill -9 PID(num)  %%kill the specific process
+killall firefox  %%kill all firefox instances
+
+
+
+SERVICES:
+apt-get install elasticsearch
+service elasticsearch start 
+localhost:9200
+
+
+
+CRONTASKS,CRONTABS,schedule running tasks
+crontab -e
+crontan -l
+
+

@@ -1,0 +1,18 @@
+17.08.17
+1.char** argv 
+//char**  a pointer to a poniter of char,
+Char **argv:
+As you already noticed the variable is pointer to pointer. Argv points to a character pointer. When you pass Argument in command line each Argument interpreted as string. String is a character array. Argv hold the base address of each character array(argumnet string).
+You can access each string by index number.
+argv[argc-1] is the last element.
+
+2.'a',"abc"
+//'a' 是一个字符，charater,
+  "abc" 是一个字符串 character array
+
+3.char a[] 与string a 
+//上述均为字符串的表达方式， C 与C++ 的区别
+char a[4][10]: 4个长度为10的字符串
+string a[4]： 4个长度不定的字符串
+
+4.

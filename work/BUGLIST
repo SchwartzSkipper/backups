@@ -1,0 +1,41 @@
+./.bashrc  //execute the commands whenever the computer is launched.
+
+ . ~/catkin_ws/devel/setup.bash    //add the workspace to your ROS environment you need to source the generated setup file whenever you created or modified a ros pkg.
+ source devel/setup.bash  // whenever a new pkg is built, the environment is updated.
+
+catkin clean  //clean the entire build and devel space
+
+
+17.08.07
+Twist is the presentation of velocity both linear and angular.
+Pose expresses the position and orientation of a robot.
+Manifests : information about a pkg, license infor, depends, compiler flags. managed by manifests.xml
+Stacks : pkgs gathering 
+Stack Manifests: license info, denpends.
+Services : needed when communicate with nodes and receive a reply,  topics can't do.
+
+
+17.08.10
+rostopic publish standard form: rostopic pub /husky_velocity_controller/cmd_vel geo/Twist -r 1 -- '[0.0, 0.0, 0.0]' '[0.0, 0.0, 1.0]'
+
+
+17.08.11
+//Q:gazebo simulation launch file bug: when some world are included in a launch file, and If the world files contain external model files which should be pulled from model repository,
+there turns out an error : No namespace found 
+S:Run the following command to download gazebo model repository.	
+$ wget -r -R "index\.html*" http://models.gazebosim.org/
+
+
+17.08.16
+//Q:Rospack ERROR: [rospack] Warning: error while crawling /home/honggang: boost::filesystem::status: Permission denied: "/home/honggang/.gvfs"
+S: sourceRos first, if does not work. 
+#umount /home/useraccount/.gvfs
+#rm -rf .gvfs/
+
+17.08.17
+//1.Ubuntu: link directory 
+S:http://www.cnblogs.com/jiuyueguang/p/3174296.html
+
+170824
+//git ignore
+S:http://www.jianshu.com/p/ea6341224e89
