@@ -33,9 +33,16 @@ S: sourceRos first, if does not work.
 #rm -rf .gvfs/
 
 17.08.17
-//1.Ubuntu: link directory 
+//1.Ubuntu: link directory　软链接
 S:http://www.cnblogs.com/jiuyueguang/p/3174296.html
 
 170824
-//git ignore
+//git ignore 
 S:http://www.jianshu.com/p/ea6341224e89
+
+170901
+//Iphone hotspot static ip: 172.20.10.2~14
+try to set a smaller num of the last address value
+//　shell commands are running parallelly,sh　文件其实是针对命令行语句的集合简写
+并行处理是ros　处理命令的特性，在同一个master　当中，不同节点通过　
+  

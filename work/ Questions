@@ -58,4 +58,7 @@ http://wiki.ros.org/Names
 3.ros::spin(), ros::spinOnce() 两类学习
 4.advertise 与 publish 有什么区别 n.advertise    publish
 5.rosparam 参数服务器
+
+170905
+1.scan2point 几个类函数的区别
   

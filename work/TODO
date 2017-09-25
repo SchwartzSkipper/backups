@@ -28,4 +28,19 @@ http://www.boost.org/doc/libs/1_65_0/libs/smart_ptr/doc/html/smart_ptr.html
 170824
 1. TCP/IP 协议学习
 2. SLAM 原理学习
-3. 
+
+170825
+1.Hector_SLAM 论文学习
+2.Hector_slam pkg 学习
+3. global_planner & local planner 学习
+
+170901
+1.Probabilistic Robotics 学习
+2.ignore laser intensity 代码检测
+3.forklift 学习过程整理
+4.ceres 库学习
+
+170918
+1.cmake tutorial
+2.slambook study
+

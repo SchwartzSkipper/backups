@@ -1,7 +1,7 @@
 2017.08.15
 调试pisces双目导航AGV
 
-远程链接AGV下位机
+远程链接AGV工控机
 1.使用sick自带驱动配置激光设备，import 已有的config至驱动程序中. 注意配置时output　应该是连续性输出
 配置完成后再transfer至激光设备当中。ls etc/dev 查看电脑可用设备
 修改pisces-base.launch文件　　　串口转usb通讯　front: usb_left, rear: usb_intern43
@@ -54,3 +54,9 @@ range sensors: info from rviz
 odometry: sanity check for odom, rotation  
 
 
+
+2017.09 forklift-tuning
+plc_launch 文件：　读取plc中输入量
+rosbridge_driver.cpp　驱动调试，求解cmd_vel 与模拟电压量之间的linear_ratio
+建图map_size:2048
+建图时漂移：四周建筑无特征，过于空旷．建大图时：可分段建，分段保存

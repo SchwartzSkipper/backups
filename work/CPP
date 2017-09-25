@@ -15,4 +15,11 @@ argv[argc-1] is the last element.
 char a[4][10]: 4个长度为10的字符串
 string a[4]： 4个长度不定的字符串
 
-4.
+4.cmake编译
+cmake -DCMAKE_TYPE:debug, release　调试或发行版本编译
+cmake -j3 -l3 编译优化选项
+cmakelist.txt　release版本编辑选项　launch文件　archive: library: runtime:
+
+5.namespace and friend class 
+
+6.基类，继承性，封装性
