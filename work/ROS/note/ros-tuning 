@@ -1,0 +1,62 @@
+2017.08.15
+调试pisces双目导航AGV
+
+远程链接AGV工控机
+1.使用sick自带驱动配置激光设备，import 已有的config至驱动程序中. 注意配置时output　应该是连续性输出
+配置完成后再transfer至激光设备当中。ls etc/dev 查看电脑可用设备
+修改pisces-base.launch文件　　　串口转usb通讯　front: usb_left, rear: usb_intern43
+rostopic hz 检测有无话题链接
+若话题无反应，直接使用com口连接电脑进行检测，看激光扫描仪器是否在进行工作。
+激光仪工作无问题，则检测422串口转USB的接口问题，可能出现串口接口接错的问题。TXD,RXD
+
+
+2.配置pisces_base.launch　文件（tf配置）
+
+tf_base_footprint 无xy值　　
+　　　
+base-link,laser-link,base_footprint,base_laser,
+tf_base_laser_front 与tf_base_laser_rear　x,y,z,yaw(z),roll(x)
+x,y,　为激光中心距AGV中心的距离，z值为激光扫描仪扫描中心距离
+tf_base_imu
+？x,y 没改变，如何调整？
+
+配置pisces-navigation.launch 文件（global&local costmap）
+base_footprint 在global与local中均需配置，先实际测量x,y,z值，再进行各项参数配置
+
+设置完成后，在rviz中对tf进行检测：
+首先bringup/shell/fake_monitor.sh 　再rviz
+
+
+
+
+3.驱动器学习
+rostopic pub   waypoint_user_pub  "errno_study"  ? aqmd2s.launch　
+rosbridge_drive_aqmsd2s.launch
+
+4.装包: laser_scan_matcher,校准weel的两个参数: ratio 与　seperation weels 
+先校准ratio: csm_ration_calibration.launch，　首先按照驱动器的pisces_base.launch文件中的值来进行预设prev,然后　roslaunch　校准launch file，得到新的校准值，并修改piesces_base.launch中的参数。　再按照相同的流程校准wheel_seperation参数
+
+5.使用rviz对odom进行检测，
+对pisces_base.launch中的robot_pose_ekf，　imu选项关闭
+首先对odom 以及 imu 等 topic 进行频率测试，频率大概为50hz左右。
+再对odom进行测试。
+odom 的误差 如偏斜程度可衡量校准精度， 其中imu可能出现数值跳变问题。
+
+6.建图测试：gmapping pkg
+打开imu，设置slam_gmapping 中各类参数，如xmin/max ymin/max; minimumScore,maxRange
+
+
+
+
+Basic navigation tuning guide
+1.check three components of robot's navigation:range sensors, odometry, and localization 
+range sensors: info from rviz
+odometry: sanity check for odom, rotation  
+
+
+
+2017.09 forklift-tuning
+plc_launch 文件：　读取plc中输入量
+rosbridge_driver.cpp　驱动调试，求解cmd_vel 与模拟电压量之间的linear_ratio
+建图map_size:2048
+建图时漂移：四周建筑无特征，过于空旷．建大图时：可分段建，分段保存

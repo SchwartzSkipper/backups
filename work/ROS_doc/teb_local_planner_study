@@ -1,4 +1,0 @@
-
-obstacle avoidance theoretical  　(cost function) inflation　layer 膨胀层
-penalty:
-The teb_local_planner waives the ability of taking hard constraints into account in order to better account for efficiency. Hard constraints are transformed into soft constraints, leading to the composition of quadratic penalty terms with finite costs.

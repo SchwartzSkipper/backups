@@ -1,0 +1,41 @@
+git HEAD: 用HEAD表示示当前版本,也就是最新的提交 commit
+git reset --hard HEAD^ reset the local repo's version.
+git reset --hard 2314123 <!--commit ID-->
+
+git reflog: to review every git command from the operations history
+
+working directory: the visible directory in your pc 
+repository: the hidden volume .git in your WD 
+            containing temp repo: stage; branches; HEAD the pointer
+
+git procedure:
+WD (git add .) -> stage the temp repo (git commit -m ' ') -> your current branches
+
+discard changes in the WD
+git checkout -- <filename>:  the file will be reset to the latest git add or git commit status
+
+unstage changes :
+git reset HEAD <filename>
+
+TO see the difference between wd and the latest repo:
+git diff HEAD -- <filename>
+
+github, remote repo:
+要关联一一个远程库,使用用命令 git remote add origin git@server-name:path/repo-name.git ;
+关联后,使用用命令 git push -u origin master 第一一次推送master分支支的所有内容;
+此后,每次本地提交后,只要有必要,就可以使用用命令 git push origin master 推送最新修
+改;
+
+git branch:
+查看分支支:git branch
+创建分支支:git branch name
+切换分支支:git checkout name
+创建+切换分支支: git checkout -b name
+合并某分支支到当前分支支: git merge name
+删除分支支: git branch -d name
+
+git log --graph --pretty=oneline --abbrev-commit
+用用 git log --graph 命令可以看到分支支合并图
+
+git merge: 
+to merge the conflicts from different branches: first edit the conflict then add&commit

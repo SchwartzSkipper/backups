@@ -1,0 +1,25 @@
+17.08.04
+navigation pkgs except for the following:
+carrot_planner
+move_slow_and_clear
+fake_localization
+voxel_grid
+slam pkg:  gmapping
+
+
+17.08.07
+setting up with tf:
+src/tf_broadcaster  //broadcasting a Transform
+src/tf_listener    //using a transform.
+navigation packages only accept sensor_msgs/LaserScan or sensor_msgs/PointCloud
+
+
+17.08.08
+amcl: a probabilistic localization system for a robot moving in 2D, uses a particle filter to track the pose of a robot against a known map.
+amcl: sample_motion_model_odometry, beam_range_finder_model, likelihood_field_range_finder_model, Augmented_MCL, and KLD_Sampling_MCL.
+
+As currently implemented, this node works only with laser scans and laser maps. It could be extended to work with other sensor data.
+
+
+base_local_planner:  Using a map, the planner creates a kinematic trajectory for the robot to get from a start to a goal location. 
+

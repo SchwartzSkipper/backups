@@ -1,0 +1,7 @@
+http://www.cppblog.com/mythit/archive/2009/04/19/80492.aspx
+
+F= G + H 
+
+G:从起点A，沿着产生的路径，移动到网格上指定方格的移动耗费
+H: 从网格上那个方格移动到终点B的预估移动耗费 ignore the obstacles. manhaton distance 有格距离
+
