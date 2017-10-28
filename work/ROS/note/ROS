@@ -25,13 +25,16 @@ nano package.xml
 
 Building ROS Packages
 catkin_make combines the calls to cmake and make in the standard CMake workflow.
-# In a catkin workspace
+
+In a catkin workspace
+
 $ catkin_make [make_targets] [-DCMAKE_VARIABLES=...]
-# In a catkin workspace, when your projects are not in the /src directory
+
+In a catkin workspace, when your projects are not in the /src directory
+
 $ catkin_make --source my_src
 $ catkin_make install --source my_src  # (optionally)
 build 目录是build space的默认所在位置，同时cmake 和 make也是在这里被调用来配置并编译你的程序包。devel 目录是devel space的默认所在位置, 同时也是在你安装程序包之前存放可执行文件和库文件的地方。
-
 
 ------------------------------------------------------------------------------------------------------
 
@@ -51,7 +54,6 @@ rosrun <pkg> [node_name] //rosrun allows you to use the package name to directly
 //ros 可以通过命令行重新配置名称,使用Remapping Argument改变节点名称
 remapping arguments   //http://wiki.ros.org/Remapping%20Arguments
 rosnode ping my_turtle   //test the turtlesim
-
 
 ------------------------------------------------------------------------------------------------------
 
@@ -112,7 +114,6 @@ rosmsg
 	rosmsg package	//List messages in a package
 	rosmsg packages	//List packages that contain messages
 
-
 ------------------------------------------------------------------------------------------------------
 
 
@@ -140,7 +141,6 @@ rosparam get /  %% get all of the paras in the parameter server
 
 rosparam dump [file_name]
 rosparam load [options] file [namespace]
-
 
 ------------------------------------------------------------------------------------------------------
 
@@ -171,7 +171,6 @@ Launch 文件解析
 
 $ roslaunch beginner_tutorials turtlemimic.launch
 
-
 ------------------------------------------------------------------------------------------------------
 
 
@@ -184,12 +183,10 @@ msg文件存放在package的msg目录下，srv文件则存放在srv目录下。
 rosmsg show Name
 rossrv show Name
 
-
 ------------------------------------------------------------------------------------------------------
 
 
 Creating simple msg pub and sub
-
 
 ------------------------------------------------------------------------------------------------------
 
@@ -203,10 +200,25 @@ message geometry_msgs/Twist 消息类型为 Vector3 linear; Vector3 angular
 ROS调试，动态参数调试：
 rosrun rqt_reconfigure rqt_reconfigure
 
-
 ------------------------------------------------------------------------------------------------------
 ROS_INFO():
 for data type double  msg:
 ROS_INFO([%f],msg);
+
+
+
+ros_dynamic_reconfigure:
+
+```cfg
+  21 exit(gen.generate(PACKAGE, "dynamic_tutorials", "Tutorials"))
+```
+
+The last line simply tells the generator to generate the necessary files and exit the program. The second parameter is the name of a node this could run in (used to generate documentation only), the third parameter is a name prefix the generated files will get (e.g. "<name>Config.h" for c++, or "<name>Config.py" for python.)
+
+http://wiki.ros.org/dynamic_reconfigure/Tutorials/HowToWriteYourFirstCfgFile
+
+
+
+
 
 

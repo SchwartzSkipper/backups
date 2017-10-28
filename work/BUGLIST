@@ -29,8 +29,10 @@ $ wget -r -R "index\.html*" http://models.gazebosim.org/
 17.08.16
 //Q:Rospack ERROR: [rospack] Warning: error while crawling /home/honggang: boost::filesystem::status: Permission denied: "/home/honggang/.gvfs"
 S: sourceRos first, if does not work. 
-#umount /home/useraccount/.gvfs
-#rm -rf .gvfs/
+
+umount /home/useraccount/.gvfs
+
+rm -rf .gvfs/
 
 17.08.17
 //1.Ubuntu: link directory　软链接
@@ -45,4 +47,11 @@ S:http://www.jianshu.com/p/ea6341224e89
 try to set a smaller num of the last address value
 //　shell commands are running parallelly,sh　文件其实是针对命令行语句的集合简写
 并行处理是ros　处理命令的特性，在同一个master　当中，不同节点通过　
+
+171021
+
+local_costmap: obstacle_range
+
+
+
   

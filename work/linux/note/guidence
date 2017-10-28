@@ -84,9 +84,9 @@ attention:  -exec grep -i -n "function" {} + 整体为一个flag， 由- 开始 
 
 
 >  %%redirect the output of a command into a file.
-ls > output.txt
-| tee  %%print the results out and also save them in a file.
-ls -l | tee of.txt 
+>  ls > output.txt
+>  | tee  %%print the results out and also save them in a file.
+>  ls -l | tee of.txt 
 
 
 
@@ -111,5 +111,16 @@ localhost:9200
 CRONTASKS,CRONTABS,schedule running tasks
 crontab -e
 crontan -l
+
+
+
+PIPE:  pack up the result of a command and send it to the command after |
+| :
+
+
+
+() renturn to current working dir after executing the commands
+
+(cd: /etc && ls -a)
 
 
