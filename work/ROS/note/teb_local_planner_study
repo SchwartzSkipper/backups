@@ -1,4 +1,83 @@
-
 obstacle avoidance theoretical  　(cost function) inflation　layer 膨胀层
 penalty:
 The teb_local_planner waives the ability of taking hard constraints into account in order to better account for efficiency. Hard constraints are transformed into soft constraints, leading to the composition of quadratic penalty terms with finite costs.
+
+
+
+####2017.11.06
+
+procedures:
+optimization of the trajectory (*The optimization footprint model might differ from the costmap footprint model*) -> feasibility check (*costmap commom footprint, checking whether collision-free or not*)
+
+possible tuning params:
+
+1. increase`min_obstacle_dist`
+
+2. regarding several conflicting params:  adjust the correspon. wright. `weight_obstacle`
+
+3. Shift the argument by adding an "extra margin" to `min_obstacle_dist`
+
+4. `penalty_epsilon`: for all penalty terms
+
+5. `obstacle_poses_affected`:  in the planned trajectory, the closet pose w.r.t the obstacle is located, and the neighboring poses are taken into account. Also bigger obstacles require more connected poses to avoid inadmissable shortcuts. You may also choose a high value (> trajectory length) in order to connect all poses with each obstacle.
+
+6. For car-like robots, the pose [0,0] is located at the rear-axle (axis of rotation)
+
+7. `feasibility_check_no_poses`: the num of iterated feasiblity-checking poses starting from the current pose, not too high, reduce time-optimality
+
+8. #####global path following #####
+
+   adapt the tradeoff between time-optimality and path-following,  `global_plan_via_point_sep` and `weight_viapoint`. a too fine resolution together with a large optimization weight might influence the obstacle avoidance behavior for (dynamic/appearing) obstacles (since the obstacle cost could be negligible in that case).
+
+#### 2017.11.13####
+
+To avoid local optimal:
+
+the `homotopy class planning` algorithm seeks for (topologically) 
+alternative solutions and the `feasibility check` (see section below) 
+rejects such a solution before actually commanding the robot. 
+
+Computational time influences:
+
+Local [costmap_2d](http://wiki.ros.org/costmap_2d) configuration (*a rolling window is highly recommended!*): 
+
+| `width`/`height` | Size of the local costmap: implies maximum trajectory length and how many occupied cells are taken into account (major impact on computation time, but if too small: short prediction/planning horizon reduces the degrees of freedom, e.g. for obstacle avoidance). |
+| ---------------- | ---------------------------------------- |
+| `resolution`     | Resolution of the local costmap: a fine resolution (small values) implies many obstacles subject to optimization (major impact on computation time). |
+
+Obstacle/Costmap parameters of the [teb_local_planner](http://wiki.ros.org/teb_local_planner): 
+
+| `costmap_obstacles_behind_robot_dist` | Since the local costmap is centered at the current robot position, not all obstacles behind the robot must be taken into account. To allow safe turning behaviors, this value should be non-zero. A higher value includes more obstacles for optimization. |
+| ------------------------------------- | ---------------------------------------- |
+| `obstacle_poses_affected`             | Number of nearest neighbors on the trajectory taken into account (increases the number of distance calculations for each obstacle). For small obstacles and point obstacles, this value can be small (<10). Increase the value again if the trajectory is not smooth enough close to obstacles. |
+| `footprint_model`                     | The robot footprint model influces the runtime, since the complexity of distance calculation is increased (avoid a polygon footprint if possible). Refer to [this tutorial](http://wiki.ros.org/teb_local_planner/Tutorials/Obstacle%20Avoidance%20and%20Robot%20Footprint%20Model). The footprint can be visualized by activating the teb markers in rviz. |
+
+Trajectory representation: 
+
+| `dt_ref`                         | Determines the desired resolution of the trajectory: small values lead to a fine resolution and thus a better approximation of the kinodynamic model, but many points must be optimized (major impact on optimization time). Too high values (> 0.6s) can lead to trajectories that are not feasible anymore due to the poor approximation of the kinodynamic model (especially in case of car-like robots). |
+| -------------------------------- | ---------------------------------------- |
+| `max_global_plan_lookahead_dist` | Limits the distance to the virtual goal (along the global plan) and thus the number of poses subject to optimization (temporal distance between poses approx `dt_ref` seconds). But the length is also bounded by the local costmap size |
+
+Optimization parameters: 
+
+| `no_inner_iterations` | Number of solver calls in each "outer-iteration". Highly influences the computation time but also the quality of the solution. |
+| --------------------- | ---------------------------------------- |
+| `no_outer_iterations` | Number of outer iterations for each sampling interval that specifies how often the trajectory is resized to account for `dt_ref` and how often associations between obstacles and planned poses are renewed. Also the solver is called each iteration. The value significantly influences the computation time as well as convergence properties. |
+| `weight_acc_lim_*`    | You can ignore acceleration limits by setting the weight to 0.0. By doing so the complexity of the optimization and hence the computation time can be reduced. |
+
+Parallel planning of alternative trajectories: 
+
+| `enable_homotopy_class_planning` | If you only have timing problems in case multiple alternatives are computed, set the alternative planning to `false` or first restrict the number of alternatives using `max_number_classes`. |
+| -------------------------------- | ---------------------------------------- |
+| `max_number_classes`             | Restrict the number of alternative trajectories that are subject to optimization. Often 2 alternatives are sufficient (avoid obstacle on the left or right side). |
+
+There are further parameters regarding the sampling of the roadmap_graph (`roadmap_graph_*`) that might be adjusted if the computation time is still too long with homotopy class planning enabled and max. 2 alternatives. 
+
+
+
+###notice:*v/omega > r_min*. ###
+
+
+
+
+

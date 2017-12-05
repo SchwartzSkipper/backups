@@ -2,54 +2,73 @@ Navigation package  // read through, hands-on tutor
 Gmapping
 AGV3.0 Testing
 
-2017.08.14
+####2017.08.14
+
 1.计算机网络　学习
 2.linxu bash command line 学习
 3.publish a msg to AGV 练习
 4.上位机网络配置
 
-2017.08.16
+####2017.08.16
+
 1.gmapping.pkg
 //2.laser_scan_matcher.pkg
 
-170817
+####170817
+
 //1.ROS: Diagnostic
 
-170822
+####170822
+
 //1.github 指南
 //2.ssh 连接方式　学习
 
-170823
+####170823
+
 1.实现流程逻辑
 2.C++ Boost 库 
 http://www.boost.org/doc/libs/1_65_0/libs/smart_ptr/doc/html/smart_ptr.html
 3.C++ PCL 库学习
 
-170824
+####170824
+
 1. TCP/IP 协议学习
 2. SLAM 原理学习
 
-170825
+####170825
+
 1.Hector_SLAM 论文学习
 2.Hector_slam pkg 学习
+
 3. global_planner & local planner 学习
 
-170901
+####170901
+
 1.Probabilistic Robotics 学习
 //2.ignore laser intensity 代码检测
 //3.forklift 学习过程整理
 4.ceres 库学习
 
-170918
+####170918
+
 1.cmake tutorial
 2.slambook study
 
-171006
+####171006
+
 1.config of /dev/ttyusb
 
-171009
+####171009
+
 1.simulator of forklift learning
 2.promote the performance of retreating
 
-171012
+####171012
+
 //1.amclpose_monitor 
+
+####171103
+
+1. urdf, rviz simulation for a forklift
+2. tail waypoints to local planner plugin
+3. local planner promotion

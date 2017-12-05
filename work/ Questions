@@ -2,7 +2,8 @@ remapping 重映射
 Planner 路径规划
 ros::nodehandle
 
-2017.08.07
+####2017.08.07
+
 /1.C++：listener.cpp  chatterCallback function  variables ?
 /2.C++：ros::ok  &   ros::Nodehandle n.ok   difference ?
 //3.ros::Time::now()   //当下时间戳
@@ -13,33 +14,39 @@ ros::nodehandle
 /8.testing guidence 调试Agv
 //9. robot pose EKF Update Timing ?  何时update?
 
-2017.08.08
+####2017.08.08
+
 //1.navigation_config.launch 导航功能包集启动文件 多个传感器node 能否共存？
 2.map_server　如何构建一个map ？
 /3.navigation stack setup 导航包配置？ error: map, sensor传感器 node type 不确定。
 
+####2017.08.09
 
-2017.08.09
 1. service client.cpp 中　初始化程序，判断语句　if(argc !=4)  ??
 
-2017.08.11
+####2017.08.11
+
 Cmake : configuration 设置问题
 
-2017.08.14
+####2017.08.14
+
 //1.P:sensor_msgs/LaserScan 的　Subscriber 出问题，由于数据类型为Float32,均显示为乱码
 S:使用Python API　以及　rosbag，录制topic /scan，并获取其中的原始数据
 2.尝试编写针对控制速度的publisher,
 
-2017.08.15
+####2017.08.15
+
 1.ROS tf 树中的旋转顺序：roll pitch yaw ?
 2.rosbridge 作用？
 
-2078.08.16
+####2078.08.16
+
 //1.ROS 调试车辆时，驱动器学习的问题？ 调用什么文件？ 
 S:csm_calibration
 2.ROS gmapping param: minimumScore for considering the outcome of the scan matching good. Can avoid jumping pose estimates in large open spaces when using laser scanners with limited range (e.g. 5m). Scores go up to 600+, try 50 for example when experiencing jumping estimate issues.
 
-17.08.17
+####17.08.17
+
 1.ROS Remap 相关概念 理解， 与 ros::init() 相关
 http://wiki.ros.org/Remapping%20Arguments
 http://wiki.ros.org/Names
@@ -48,17 +55,20 @@ http://wiki.ros.org/Names
 2.ROS launch 文件中的各个参数作用及其修改方法
 3.ROS ros::spin() ros::spinOnce() ros::Rate()&ros::sleep() 的区别
 
-17.08.18 
+####17.08.18 
+
 1.puginlib_register_class 用法规则以及作用 ? pluginlib pkg
 2.ROS::boost 类?
 
-170823
+####170823
+
 1.ROS wiki, Remapping arguments  看不懂
 2.ros::Rate 类
 3.ros::spin(), ros::spinOnce() 两类学习
 4.advertise 与 publish 有什么区别 n.advertise    publish
 5.rosparam 参数服务器
 
-170905
+####170905
+
 1.scan2point 几个类函数的区别
-  
+
