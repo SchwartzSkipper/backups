@@ -1,0 +1,143 @@
+
+  Comp150-07: Intelligent Robotics
+
+
+    Wavefront Planning Algorithm
+
+The Wavefront algorithm finds a path from point S (start) to point G
+(goal) through a discretized workspace such as this (0 designates a cell
+of free space, 1 designates a cell fully occupied by an obstacle):
+
+ S 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 1 1 1 1 1 1 0 0 0
+ 0 0 0 1 1 1 1 1 1 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 G
+
+
+The algorithm consists of a breadth-first search (BFS) on the graph
+induced by the neighborhood connectivity (adjacency) of cells, starting
+at G, which is assigned the value 2 at the beginning. As BFS traverses
+the space, each cell is assigned a value which corresponds to the number
+of moves required for the shortest path from that cell to the goal.
+
+
+      Neighborhood connectivity
+
+There are two ways to connect the cells in a square grid like the one above.
+
+The *von Neumann neighborhood* of a cell C consists of its 4 neighbors
+adjacent to the faces of the cell square:
+
+   1
+ 4 C 2
+   3
+
+There are therefore 4 possible moves out of C, and C has 4 children in
+the graph induced by the von Neumann connectivity.
+
+The *Moore neighborhood* of a cell C consists of its 8 neighbors
+adjacent to both the faces and the corners of the cell square:
+
+  8 1 2
+  7 C 3
+  6 5 4
+
+There are therefore 8 possible moves out of C (including 4 diagnoal
+moves) and C has 8 children in the graph induced by the Moore connectivity.
+
+
+      Breadth-first search
+
+BFS is a systematic way of searching a graph: that is, visiting every
+node. The root of the BFS search tree is the node in the graph at which
+you start the search. The fringe is the list, initially empty, of all
+nodes queued for expanding or examining. The visited list is the list,
+initially empty, of all nodes already visited, which prevents the search
+from going in circles.
+
+Here is the general pseudo-code for a BFS algorithm. Note that
+implementations of the fringe and visited list can differ depending on
+what exactly you are trying to do. For example, in the wavefront
+planner, you can use the values of your space cells: any value > 0 has
+automatically been visited.
+
+  initialize:
+    graph := {nodes}, {edges}
+    fringe := {root}
+    visited := empty
+
+  breadth-first-search (graph, fringe, visited):
+    while fringe not empty
+       node := first element of fringe
+       if node is what we are searching for
+          return success
+       endif
+       //do whatever you need to do to node here
+       children := find children of node in graph
+       add children not in visited to back of fringe
+       add node to visited
+       remove node from fringe
+    end while
+    return failure
+
+More on BFS (including iterative implementations) on Wikipedia
+<http://en.wikipedia.org/wiki/Breadth-first_search> and on kirupa.com
+<http://www.kirupa.com/developer/actionscript/depth_breadth_search.htm>.
+
+The Wavefront planner for Lab 4 is simpler than general BFS, and should
+be implemented in the simplest possible way. For example, we are not
+searching for any particular node, but labelling the entire graph with
+values.
+
+
+      Wavefront example
+
+Using the Moore neighborhood for illustration purposes, we start at the
+goal G and assign it the value 2. The "wave" goes out from G to its
+children, which are all assigned the value of (2+1=)3:
+
+ S 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 1 1 1 1 1 1 0 0 0
+ 0 0 0 1 1 1 1 1 1 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 3 3
+ 0 0 0 0 0 0 0 0 0 0 3 2
+
+The "wave" then propagates out one more step to the children of the
+cells marked "3", which have not already been assigned a positive value:
+
+ S 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 1 1 1 1 1 1 0 0 0
+ 0 0 0 1 1 1 1 1 1 4 4 4
+ 0 0 0 0 0 0 0 0 0 4 3 3
+ 0 0 0 0 0 0 0 0 0 4 3 2
+
+And so on, until there are no more children to explore. At that point,
+only unreachable parts of the space (if any) will still be assigned the
+value of 0. The example space looks like this:
+
+ 14 13 12 11 10  9  8  7  7  7  7  7
+ 13 13 12 11 10  9  8  7  6  6  6  6
+ 13 12 12  1  1  1  1  1  1  5  5  5
+ 13 12 11  1  1  1  1  1  1  4  4  4
+ 13 12 11 10  9  8  7  6  5  4  3  3
+ 13 12 11 10  9  8  7  6  5  4  3  2
+
+In this graph, the starting position has value 14, and the goal has
+value 2. To plan an optimal path, you start at the goal, and at every
+point, until you've reached the goal, you pick the next cell that has
+the minimum value of all adjacent cells. For example, one good path from
+S to G (with each cell represented by its x,y Cartesian coordinates,
+starting at 0,0 in the lower-left corner):
+
+    (0,5)->(1,5)->(2,5)->(3,5)->(4,5)->(5,5)->(6,5)->(7,4)->(8,4)->(9,3)->(9,2)->(10,1)->(11,0)
+
+In principle, all choices among adjacent cells with equal values are
+equivalent. In practice, you may want to choose to go in a straight line
+over turning to prevent accumulation of angular error.
+------------------------------------------------------------------------
+Paulina Varshavskaya, paulina [at] cs.tufts.edu
+
