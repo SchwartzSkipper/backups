@@ -72,3 +72,21 @@ http://wiki.ros.org/Names
 
 1.scan2point 几个类函数的区别
 
+####180315
+
+1.slam core, hector,gmapping,cartographer
+2.navigation, move base core,
+3.actionlib
+4.thread & process
+
+####180328
+
+1.pnh("~"),nh("") difference 
+
+####180330
+
+1. cmake: add_executable & add_library  install msg launch
+
+####180510
+
+1. controlling in odom and map diff?

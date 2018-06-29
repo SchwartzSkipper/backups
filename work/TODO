@@ -72,3 +72,17 @@ http://www.boost.org/doc/libs/1_65_0/libs/smart_ptr/doc/html/smart_ptr.html
 1. urdf, rviz simulation for a forklift
 2. tail waypoints to local planner plugin
 3. local planner promotion
+
+####1803
+
+1. harmman 
+2. move_base compitable with local location; laser filter box filter.
+3. arduino radio frequency & warning lights
+4. english translations & germam oral promotion
+
+####1804
+
+1. visual, imu, laser, localization
+2. boost;C++ 11 bind,auto,thread,shared_ptr
+
+
